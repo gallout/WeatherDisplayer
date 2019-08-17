@@ -13,14 +13,16 @@ import {
 
 class App extends React.Component {
   state = {
-    temperature: undefined,
     city: undefined,
-    country: undefined,
-    humidity: undefined,
+    temperature: undefined,
+    description_icon: undefined,
     description: undefined,
+    humidity: undefined,
+    pressure: undefined,
+    wind: undefined,
     error: undefined,
-    currentLocation: undefined,
-    currentCityImage: undefined
+    //currentLocation: undefined,
+    currentCityImage: undefined,
   };
 
   /*getWeather = async e => {
@@ -66,7 +68,7 @@ class App extends React.Component {
 
     cachedLat
       ? this.setCoordsFromLocalStorage(cachedLat, cachedLon)
-      : this.getCoords();
+      : this.setCoords();
   };
 
   setCoords = () => {
@@ -103,9 +105,14 @@ class App extends React.Component {
         ]);
         console.log(resA);
         this.setState({
+          currentCityImage: resB.currentCityImage,
           city: resA.city,
           temperature: resA.temperature,
-          currentCityImage: resB.currentCityImage,
+          description_icon: resA.description_icon,
+          description: resA.description,
+          humidity: resA.humidity,
+          pressure: resA.pressure,
+          wind: resA.wind
         });
       }
     );
@@ -132,15 +139,20 @@ class App extends React.Component {
   }
 
   render() {
-    const { city, currentCityImage, temperature } = this.state;
+    const { currentCityImage, city, temperature, description_icon, description, humidity,pressure, wind  } = this.state;
     return (
       <div>
         <div className="col-md-4">
                <Form onSubmit={this.onSubmit} />
                 <Card
-                  city={city}
                   currentCityImage={currentCityImage}
+                  city={city}
                   temperature={temperature}
+                  description_icon={description_icon}
+                  description={description}
+                  humidity={humidity}
+                  pressure={pressure}
+                  wind={wind}
                 />
       </div> 
       </div>

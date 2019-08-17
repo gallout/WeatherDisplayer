@@ -23,36 +23,6 @@ body {
   padding: 0.4rem 1.9 rem;
 }
 
-.container-fluid .row {
-  padding-top: 6em;
-}
-
-.card-img-top {
-  transform: scale(1);
-  transition: transform 0.5s ease;
-}
-
-.card-img-top:hover {
-  transform: scale(1.8);
-}
-
-.card-title {
-  padding-left: 15px;
-  display: inline-block;
-  text-align: left;
-  width: 370px;
-  color: white;
-}
-
-.card-video-link {
-  padding-right: 10px;
-  padding-bottom: 25px;
-  margin-left: auto !important;
-  margin-right: 0 !important;
-  display: inline-block;
-  text-align: right;
-  width: 86px;
-}
 
 .overflow {
   padding-left: 10px;
@@ -61,12 +31,11 @@ body {
   padding-top: 100px;
 }
 
-.maincard {
-  text-align: "center";
-  padding-top: 5px;
-  border-radius: 10px;
-}
 
 .col-md-4 {
   margin-top: 10px;
+}
+
+.weather_value {
+  margin-top: 120px;
 }

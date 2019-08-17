@@ -25,20 +25,20 @@ export const callWeatherApi = async (latitude, longitude) => {
   );
 
   let body = await response.json();
-  console.log(body);
   if (body.cod == 404) {
     throw Error(body.message);
   } else {
     return {
       error: "",
+      loading: false,
       data: body,
       city: body.name,
-      loading: false,
       temperature: body.main.temp,
-      city: body.name,
-      country: body.sys.country,
-      humidity: body.main.humidity,
+      description_icon: body.weather[0].icon,
       description: body.weather[0].description,
+      humidity: body.main.humidity,
+      pressure: body.main.pressure,
+      wind: body.wind.speed,
     };
   }
 };
@@ -50,15 +50,14 @@ export const callUnsplashApi = async location => {
     "https://api.unsplash.com/search/photos/?client_id=" +
       unsplash_API_KEY +
       "&query=" +
-      "china"
+      "london"
   );
 
-  console.log(response);
   let body = await response.json();
-  console.log(body);
+
   if (response.status !== 200) throw Error(body.message);
   var randomPhotoNumber = Math.floor(Math.random() * 10);
-  console.log(body.results[randomPhotoNumber].urls.regular);
+
   return {
     currentCityImage: body.results[randomPhotoNumber].urls.regular
   };
