@@ -34,11 +34,11 @@ const Card = props => (
           <tr>
             <td>
             <h2><p className="card-title"><b>{props.city}</b></p>
-            <div class="edit-button"> Edit </div>
+            
            </h2> 
-           
+           <div className="edit-button"> Edit </div>
               <h1><p className="card-title"> 
-              <b> <span class="temperature-title"> { Math.round(props.temperature - 273,1) }°C</span> </b>
+              <b> <span className="temperature-title"> { Math.round(props.temperature - 273,1) }°C</span> </b>
               </p></h1>
 
               <h3><p className="card-title"> 
@@ -48,13 +48,24 @@ const Card = props => (
               </span> </b>
               </p></h3>
 
-              <h4> <p className="card-title"> 
-              <span>
-              <td className="card-element"> <p><b><td className="card-elem-size">{props.humidity} % </td></b> <td className="card-elem-name-size">Humidity</td></p> </td> 
-              <td className="card-element"><p><b><td className="card-elem-size">{props.pressure}</td></b> <td className="card-elem-name-size">Pressure, hpa</td> </p>  </td> 
-              <td className="card-element"> <p><b><td className="card-elem-size">{props.wind}</td> </b> <td className="card-elem-name-size">Wind, ms</td></p> </td>  
-              </span>
-               </p></h4>
+              <h4> <div className="card-title"> 
+              
+              <div className="card-element"> 
+                <div className="card-elem-size"><b>{props.humidity}% </b></div> 
+                <div className="card-elem-name-size">Humidity</div>
+              </div> 
+
+              <div className="card-element">
+                <div className="card-elem-size"><b>{props.pressure} </b></div> 
+                <div className="card-elem-name-size">Pressure, hpa</div>  
+              </div> 
+
+              <div className="card-element"> 
+                <div className="card-elem-size"><b>{props.wind} </b></div>  
+                <div className="card-elem-name-size">Wind, ms</div> 
+              </div>  
+             
+               </div></h4>
             
              
             </td>

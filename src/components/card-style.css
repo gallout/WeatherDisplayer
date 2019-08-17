@@ -23,7 +23,6 @@ body {
   padding: 0.4rem 1.9 rem;
 }
 
-
 .overflow {
   padding-left: 10px;
   padding-right: 10px;
@@ -36,6 +35,42 @@ body {
   margin-top: 10px;
 }
 
-.weather_value {
-  margin-top: 120px;
+.edit-button {
+  padding: 5px 14px;
+  height: 30px;
+  width: 100px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white !important;
+  border: transparent !important;
+  background-color: transparent !important;
+  float: left;
+  text-align: left;
+}
+
+.card-element {
+  padding-right: 10px;
+  text-align: center;
+  display: inline-block; 
+}
+
+.card-elem-size {
+  font-size: 29px;
+}
+
+.card-elem-name-size {
+  font-size: 16px;
+  padding-top: 10px;
+}
+
+.temperature-title {
+  font-size: 60px;
+}
+
+.card-title {
+  padding-left: 15px;
+ /* display: inline-block;  */
+  text-align: left;
+  color: white;
+  margin-top: 30px;
 }
