@@ -14,7 +14,6 @@ const Card = props => (
     </p>
     </div> */
 
-  
     <div className="card text-center">
     <div className="overflow"
                       style={{  
@@ -38,7 +37,7 @@ const Card = props => (
            </h2> 
            <div className="edit-button"> Edit </div>
               <h1><p className="card-title"> 
-              <b> <span className="temperature-title"> { Math.round(props.temperature - 273,1) }°C</span> </b>
+              <b> <span className="temperature-title"> { Math.round(props.temperature) }°C</span> </b>
               </p></h1>
 
               <h3><p className="card-title"> 
@@ -64,16 +63,13 @@ const Card = props => (
                 <div className="card-elem-size"><b>{props.wind} </b></div>  
                 <div className="card-elem-name-size">Wind, ms</div> 
               </div>  
-             
-               </div></h4>
-            
-             
+       
+               </div></h4> 
             </td>
           </tr>
         </tbody>
       </table>
       </div>
-    
     </div>
     </div>
 );

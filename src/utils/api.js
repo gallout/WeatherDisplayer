@@ -9,7 +9,7 @@ export const fetchOpenWeatherCity = async city => {
   );
 
   const json = await response.json();
-
+  console.log(json);
   return json;
 };
 

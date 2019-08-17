@@ -63,7 +63,6 @@ class App extends React.Component {
 
   handleGetLocation = async () => {
     let cachedLat = localStorage.getItem("latitude");
-    console.log(localStorage);
     let cachedLon = localStorage.getItem("longitude");
 
     cachedLat
@@ -125,7 +124,16 @@ class App extends React.Component {
   changeLocation = city => {
     fetchOpenWeatherCity(city)
       .then(res => {
-        this.setState({ city: res.name });
+        this.setState({ 
+          city: res.name,
+          temperature: res.main.temp,
+          description_icon: res.weather[0].icon,
+          description: res.weather[0].description,
+          humidity: res.main.humidity,
+          pressure: res.main.pressure,
+          wind: res.wind.speed
+
+        });
       })
       .catch(err =>
         this.setState({
