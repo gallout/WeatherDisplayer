@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 const defaultForm = {
-  city: ""
+  city: "",
+  temperature: "",
 };
 
 const Form = props => {
@@ -28,7 +29,10 @@ const Form = props => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} >
+      <div  width = "100px"
+            margin-left = "auto"
+            margin-right = "auto">
       <input
         type="text"
         name="city"
@@ -36,7 +40,9 @@ const Form = props => {
         value={form["city"]}
         onChange={handleChange}
       />
+      
       <button type="submit">Поиск</button>
+      </div>
     </form>
   );
 };

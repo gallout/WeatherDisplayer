@@ -2,7 +2,7 @@ import React from "react";
 import Titles from "./components/Titles";
 import Form from "./components/Form";
 import Weather from "./components/Weather";
-import WeatherDisplay from "./components/WeatherDisplay";
+import Card from "./components/Card";
 import "./App.css";
 
 import {
@@ -69,7 +69,7 @@ class App extends React.Component {
       : this.getCoords();
   };
 
-  getCoords = () => {
+  setCoords = () => {
     if (window.navigator && window.navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         pos => {
@@ -88,6 +88,8 @@ class App extends React.Component {
     }
   };
 
+
+
   setCoordsFromLocalStorage(cachedLat, cachedLon) {
     this.setState(
       {
@@ -99,9 +101,11 @@ class App extends React.Component {
           callWeatherApi(this.state.latitude, this.state.longitude),
           callUnsplashApi()
         ]);
+        console.log(resA);
         this.setState({
           city: resA.city,
-          currentCityImage: resB.currentCityImage
+          temperature: resA.temperature,
+          currentCityImage: resB.currentCityImage,
         });
       }
     );
@@ -123,23 +127,22 @@ class App extends React.Component {
       );
   };
 
+  componentWillMount() {
+    document.title = "Weather App";
+  }
+
   render() {
-    const { city, currentCityImage } = this.state;
+    const { city, currentCityImage, temperature } = this.state;
     return (
       <div>
-        <div className="wrapper">
-          <div className="main">
-            <div className="container">
-              <div className="row">
-                <Form onSubmit={this.onSubmit} />
-                <WeatherDisplay
+        <div className="col-md-4">
+               <Form onSubmit={this.onSubmit} />
+                <Card
                   city={city}
                   currentCityImage={currentCityImage}
+                  temperature={temperature}
                 />
-              </div>
-            </div>
-          </div>
-        </div>
+      </div> 
       </div>
     );
     /*

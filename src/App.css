@@ -32,6 +32,7 @@
   }
 }
 
+/*
 @import url("https://fonts.googleapis.com/css?family=Merriweather:100,200,300,300i,400,400i,700");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab:400,700");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400");
@@ -57,8 +58,8 @@ body {
 }
 
 .title-container {
-  height: 90vh;
-  /*background: url("img/bg.jpg") center center no-repeat; */
+  height: 90vh; 
+  background: url("img/bg.jpg") center center no-repeat; 
   background-size: cover;
   display: flex;
   align-items: center;
@@ -95,7 +96,6 @@ input[type="text"] {
   border-bottom: solid 1px #f16051;
   width: 30%;
   padding-bottom: 4px;
-  /* color: #fff !important; */
   font-weight: lighter;
   letter-spacing: 2px;
   margin-bottom: 30px;
@@ -158,4 +158,37 @@ button:active {
   font-size: 20px;
   letter-spacing: 1px;
   font-weight: 200;
+}
+*/
+
+
+input[type="text"] {
+  border: 1px solid #cccccc; /*цвет рамки*/
+  background: #ffffff !important; /* желательно прописывать, так как в Chrome при сохранных данных оно может быть желтым*/
+  outline: none; /* удаляет обводку в браузерах хром(желтая) и сафари(синяя)*/
+  height: 34px; /* высота на свое усмотрение*/
+  width: 259px; /* ширина на свое усмотрение*/
+  color: black; /*цвет шрифта в обычном состоянии*/
+  font-size: 14px; /* Размер шрифта*/
+  font-family: Tahoma; /* Стиль шрифта*/
+  padding-left: 20px;
+}
+
+button {
+  border: 0;
+  padding: 8px 20px;
+  margin: 0 2px;
+  border-radius: 2px;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: #f16051;
+  color: #fff;
+  font-weight: 100;
+  margin-left:20px !important
+}
+
+button:active {
+  outline: none;
 }

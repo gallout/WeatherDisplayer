@@ -30,10 +30,15 @@ export const callWeatherApi = async (latitude, longitude) => {
     throw Error(body.message);
   } else {
     return {
-      errorText: "",
+      error: "",
       data: body,
       city: body.name,
-      loading: false
+      loading: false,
+      temperature: body.main.temp,
+      city: body.name,
+      country: body.sys.country,
+      humidity: body.main.humidity,
+      description: body.weather[0].description,
     };
   }
 };
