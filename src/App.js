@@ -10,6 +10,7 @@ import {
   callWeatherApi,
   callUnsplashApi
 } from "./utils/api";
+import AddNewCard from "./components/AddNewCard";
 
 class App extends React.Component {
   state = {
@@ -146,12 +147,14 @@ class App extends React.Component {
     document.title = "Weather App";
   }
 
+
   render() {
     const { currentCityImage, city, temperature, description_icon, description, humidity,pressure, wind  } = this.state;
     return (
       <div>
         <div className="col-md-4">
                <Form onSubmit={this.onSubmit} />
+              <div className="cards-list">
                 <Card
                   currentCityImage={currentCityImage}
                   city={city}
@@ -162,6 +165,8 @@ class App extends React.Component {
                   pressure={pressure}
                   wind={wind}
                 />
+                
+                </div>    
       </div> 
       </div>
     );

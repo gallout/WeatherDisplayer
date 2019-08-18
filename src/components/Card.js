@@ -27,7 +27,7 @@ const Card = props => (
                         borderRadius: "10px",
                         boxShadow: "0 0 0 150px rgba(0, 0, 0, 0.33) inset"
                       }} >
-                        <div>
+                      <div>
       <table>
         <tbody>
           <tr>

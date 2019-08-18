@@ -32,7 +32,9 @@ const Form = props => {
     <form onSubmit={onSubmit} >
       <div  width = "100px"
             margin-left = "auto"
-            margin-right = "auto">
+            margin-right = "auto"
+            className ="main-form">
+              
       <input
         type="text"
         name="city"
@@ -42,6 +44,7 @@ const Form = props => {
       />
       
       <button type="submit">Поиск</button>
+      <button class="add-btn" type="submit" onClick={() => dispatchCardSet(newCard)} >Добавить</button>
       </div>
     </form>
   );
