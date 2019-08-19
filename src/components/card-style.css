@@ -7,7 +7,7 @@ body {
   height: 38rem;
   border-radius: 10px !important;
   box-shadow: 3px 3px 5px 0px rgba(145, 145, 145, 0.253) !important;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-right: 10px;
 }
 
@@ -32,7 +32,6 @@ body {
   margin-top: 0px;
 }
 
-
 .col-md-4 {
   margin-top: 10px;
 }
@@ -53,7 +52,7 @@ body {
 .card-element {
   padding-right: 10px;
   text-align: center;
-  display: inline-block; 
+  display: inline-block;
 }
 
 .card-elem-size {
@@ -71,7 +70,7 @@ body {
 
 .card-title {
   padding-left: 15px;
- /* display: inline-block;  */
+  /* display: inline-block;  */
   text-align: left;
   color: white;
   margin-top: 30px;
@@ -80,4 +79,3 @@ body {
 .cards-list {
   display: flex;
 }
-

@@ -4,13 +4,13 @@ import Form from "./components/Form";
 import Weather from "./components/Weather";
 import Card from "./components/Card";
 import "./App.css";
+import Form2 from "./components/Form2";
 
 import {
   fetchOpenWeatherCity,
   callWeatherApi,
   callUnsplashApi
 } from "./utils/api";
-import AddNewCard from "./components/AddNewCard";
 
 class App extends React.Component {
   state = {
@@ -23,7 +23,7 @@ class App extends React.Component {
     wind: undefined,
     error: undefined,
     //currentLocation: undefined,
-    currentCityImage: undefined,
+    currentCityImage: undefined
   };
 
   /*getWeather = async e => {
@@ -90,8 +90,6 @@ class App extends React.Component {
     }
   };
 
-
-
   setCoordsFromLocalStorage(cachedLat, cachedLon) {
     this.setState(
       {
@@ -125,7 +123,7 @@ class App extends React.Component {
   changeLocation = city => {
     fetchOpenWeatherCity(city)
       .then(res => {
-        this.setState({ 
+        this.setState({
           city: res.name,
           temperature: res.main.temp,
           description_icon: res.weather[0].icon,
@@ -133,7 +131,6 @@ class App extends React.Component {
           humidity: res.main.humidity,
           pressure: res.main.pressure,
           wind: res.wind.speed
-
         });
       })
       .catch(err =>
@@ -147,27 +144,35 @@ class App extends React.Component {
     document.title = "Weather App";
   }
 
-
   render() {
-    const { currentCityImage, city, temperature, description_icon, description, humidity,pressure, wind  } = this.state;
+    const {
+      currentCityImage,
+      city,
+      temperature,
+      description_icon,
+      description,
+      humidity,
+      pressure,
+      wind
+    } = this.state;
     return (
       <div>
         <div className="col-md-4">
-               <Form onSubmit={this.onSubmit} />
-              <div className="cards-list">
-                <Card
-                  currentCityImage={currentCityImage}
-                  city={city}
-                  temperature={temperature}
-                  description_icon={description_icon}
-                  description={description}
-                  humidity={humidity}
-                  pressure={pressure}
-                  wind={wind}
-                />
-                
-                </div>    
-      </div> 
+          <Form onSubmit={this.onSubmit} />
+          <div className="cards-list">
+            <Card
+              currentCityImage={currentCityImage}
+              city={city}
+              temperature={temperature}
+              description_icon={description_icon}
+              description={description}
+              humidity={humidity}
+              pressure={pressure}
+              wind={wind}
+            />
+          </div>
+        </div>
+        <Form2 onSubmit={this.onSubmit} />
       </div>
     );
     /*

@@ -161,7 +161,6 @@ button:active {
 }
 */
 
-
 input[type="text"] {
   border: 1px solid #cccccc; /*цвет рамки*/
   background: #ffffff !important; /* желательно прописывать, так как в Chrome при сохранных данных оно может быть желтым*/
@@ -186,7 +185,7 @@ button {
   background-color: #f16051;
   color: #fff;
   font-weight: 100;
-  margin-left:20px !important
+  margin-left: 20px !important;
 }
 
 button:active {
@@ -207,10 +206,11 @@ button:active {
 .add-location-button {
   display: flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
 }
 
-.main-form{
-  display:flex;
+.main-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
-

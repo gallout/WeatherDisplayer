@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 const defaultForm = {
-  city: "",
-  temperature: "",
+  city: ""
 };
 
 const Form = props => {
@@ -13,10 +12,7 @@ const Form = props => {
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
-    setForm({
-      ...form,
-      [name]: value
-    });
+    setForm({ ...form, [name]: value });
   };
 
   const onSubmit = e => {
@@ -29,22 +25,25 @@ const Form = props => {
   };
 
   return (
-    <form onSubmit={onSubmit} >
-      <div  width = "100px"
-            margin-left = "auto"
-            margin-right = "auto"
-            className ="main-form">
-              
-      <input
-        type="text"
-        name="city"
-        placeholder="Город..."
-        value={form["city"]}
-        onChange={handleChange}
-      />
-      
-      <button type="submit">Поиск</button>
-      <button class="add-btn" type="submit" onClick={() => dispatchCardSet(newCard)} >Добавить</button>
+    <form onSubmit={onSubmit}>
+      <div
+        width="100px"
+        margin-left="auto"
+        margin-right="auto"
+        className="main-form"
+      >
+        <input
+          type="text"
+          name="city"
+          placeholder="Город..."
+          value={form["city"]}
+          onChange={handleChange}
+        />
+
+        <button type="submit">Поиск</button>
+        <button className="add-btn" type="submit">
+          Добавить
+        </button>
       </div>
     </form>
   );
