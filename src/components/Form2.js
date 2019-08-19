@@ -1,57 +1,84 @@
-import React from "react";
+import React, { useState } from "react";
 import AddNewCard from "./AddNewCard";
 
-import { fetchOpenWeatherCity } from "../utils/api";
+import { fetchOpenWeatherCity, callUnsplashApi } from "../utils/api";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { randomBytes } from "crypto";
+
+library.add(faTrash);
 
 class Form2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       items: [],
-      currentItem: {}
+      currentItem: {},
+      count: 0
     };
     this.handleInput = this.handleInput.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   handleInput = e => {
     e.preventDefault();
+    const target = e.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+
     this.changeLocation(e.target.value);
+
+    this.setState({
+      currentItem: {
+        city: value
+      }
+    });
   };
 
   changeLocation = city => {
-    fetchOpenWeatherCity(city)
-      .then(res => {
-        this.setState({
-          currentItem: {
-            city: res.name,
-            temperature: res.main.temp,
-            description_icon: res.weather[0].icon,
-            description: res.weather[0].description,
-            humidity: res.main.humidity,
-            pressure: res.main.pressure,
-            wind: res.wind.speed
-          }
-        });
-      })
-      .catch(err =>
-        this.setState({
-          errorText: "city does not exist"
-        })
-      );
+    this.setState({}, async () => {
+      const [resA, resB] = await Promise.all([
+        fetchOpenWeatherCity(city),
+        callUnsplashApi()
+      ]);
+
+      this.setState({
+        currentItem: {
+          currentCityImage: resB.currentCityImage,
+          city: resA.name,
+          temperature: resA.main.temp,
+          description_icon: resA.weather[0].icon,
+          description: resA.weather[0].description,
+          humidity: resA.main.humidity,
+          pressure: resA.main.pressure,
+          wind: resA.wind.speed,
+          key: resA.id
+        }
+      });
+    });
   };
 
   addItem = e => {
     e.preventDefault();
     const newItem = this.state.currentItem;
     console.log(newItem);
+
     if (newItem.city != "") {
       const newItems = [...this.state.items, newItem];
       this.setState({
-        items: newItems
+        items: newItems,
+        key: ""
       });
     }
   };
+
+  deleteItem(key) {
+    const filteredItems = this.state.items.filter(item => item.key !== key);
+    this.setState({
+      items: filteredItems
+    });
+  }
 
   render() {
     return (
@@ -79,7 +106,7 @@ class Form2 extends React.Component {
             </button>
           </form>
         </div>
-        <AddNewCard items={this.state.items} />
+        <AddNewCard items={this.state.items} deleteItem={this.deleteItem} />
       </div>
     );
   }
