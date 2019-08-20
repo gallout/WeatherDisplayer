@@ -1,10 +1,9 @@
 import React from "react";
-import Titles from "./components/Titles";
+
 import Form from "./components/Form";
-import Weather from "./components/Weather";
 import Card from "./components/Card";
 import "./App.css";
-import Form2 from "./components/Form2";
+import AddNewCard from "./components/AddNewCard";
 
 import {
   fetchOpenWeatherCity,
@@ -12,50 +11,29 @@ import {
   callUnsplashApi
 } from "./utils/api";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faTrash);
+
 class App extends React.Component {
-  state = {
-    city: undefined,
-    temperature: undefined,
-    description_icon: undefined,
-    description: undefined,
-    humidity: undefined,
-    pressure: undefined,
-    wind: undefined,
-    error: undefined,
-    currentCityImage: undefined
-  };
-
-  /*getWeather = async e => {
-    const weather_API_KEY = "659acd0d726fc231ff96bc4e69f3b5fb";
-    e.preventDefault();
-    const city = e.target.elements.city.value;
-    const country = e.target.elements.country.value;
-    const api_call = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${weather_API_KEY}&units=metric`
-    );
-    const data = await api_call.json();
-
-    if (city && country) {
-      console.log(data);
-      this.setState({
-        temperature: data.main.temp,
-        city: data.name,
-        country: data.sys.country,
-        humidity: data.main.humidity,
-        description: data.weather[0].description,
-        error: ""
-      });
-    } else {
-      this.setState({
-        temperature: undefined,
-        city: undefined,
-        country: undefined,
-        humidity: undefined,
-        description: undefined,
-        error: "Please, enter the values"
-      });
-    }
-  };*/
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+      currentItem: {},
+      city: undefined,
+      temperature: undefined,
+      description_icon: undefined,
+      description: undefined,
+      humidity: undefined,
+      pressure: undefined,
+      wind: undefined,
+      error: undefined,
+      currentCityImage: undefined
+    };
+    this.deleteItem = this.deleteItem.bind(this);
+  }
 
   componentDidMount() {
     this.handleGetLocation();
@@ -86,6 +64,7 @@ class App extends React.Component {
           });
         }
       );
+    } else {
     }
   };
 
@@ -98,7 +77,7 @@ class App extends React.Component {
       async () => {
         const [resA, resB] = await Promise.all([
           callWeatherApi(this.state.latitude, this.state.longitude),
-          callUnsplashApi()
+          callUnsplashApi("Russia")
         ]);
         console.log(resA);
         this.setState({
@@ -116,20 +95,45 @@ class App extends React.Component {
   }
 
   onSubmit = e => {
-    this.changeLocation(e.city);
+    const newItem = this.state.currentItem;
+
+    var bool = 1;
+    this.state.items.forEach(function(item) {
+      if (item.city == newItem.city) {
+        alert("Такая карточка уже есть, либо такого города нету");
+        bool = 0;
+      }
+    });
+
+    if (bool != 0) {
+      if (newItem.city != "") {
+        const newItems = [...this.state.items, newItem];
+        this.setState({
+          items: newItems,
+          key: ""
+        });
+      }
+    } else {
+    }
   };
 
-  changeLocation = city => {
-    fetchOpenWeatherCity(city)
-      .then(res => {
+  changeLocationAndImage = city => {
+    const fetchCityData = fetchOpenWeatherCity(city);
+    const fetchUnsplashData = callUnsplashApi(city);
+    Promise.all([fetchCityData, fetchUnsplashData])
+      .then(responses => {
         this.setState({
-          city: res.name,
-          temperature: res.main.temp,
-          description_icon: res.weather[0].icon,
-          description: res.weather[0].description,
-          humidity: res.main.humidity,
-          pressure: res.main.pressure,
-          wind: res.wind.speed
+          currentItem: {
+            currentCityImage: responses[1].currentCityImage,
+            city: responses[0].name,
+            temperature: responses[0].main.temp,
+            description_icon: responses[0].weather[0].icon,
+            description: responses[0].weather[0].description,
+            humidity: responses[0].main.humidity,
+            pressure: responses[0].main.pressure,
+            wind: responses[0].wind.speed,
+            key: responses[0].id
+          }
         });
       })
       .catch(err =>
@@ -139,8 +143,15 @@ class App extends React.Component {
       );
   };
 
+  deleteItem(key) {
+    const filteredItems = this.state.items.filter(item => item.key !== key);
+    this.setState({
+      items: filteredItems
+    });
+  }
+
   componentWillMount() {
-    document.title = "Weather App";
+    document.title = "WeatherDisplayer App";
   }
 
   render() {
@@ -157,7 +168,11 @@ class App extends React.Component {
     return (
       <div>
         <div className="col-md-4">
-          <Form onSubmit={this.onSubmit} />
+          <Form
+            onSubmit={this.onSubmit}
+            changeLocationAndImage={this.changeLocationAndImage}
+          />
+
           <div className="cards-list">
             <Card
               currentCityImage={currentCityImage}
@@ -169,9 +184,9 @@ class App extends React.Component {
               pressure={pressure}
               wind={wind}
             />
+            <AddNewCard items={this.state.items} deleteItem={this.deleteItem} />
           </div>
         </div>
-        <Form2 onSubmit={this.onSubmit} />
       </div>
     );
   }

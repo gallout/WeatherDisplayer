@@ -38,19 +38,19 @@ export const callWeatherApi = async (latitude, longitude) => {
       description: body.weather[0].description,
       humidity: body.main.humidity,
       pressure: body.main.pressure,
-      wind: body.wind.speed,
+      wind: body.wind.speed
     };
   }
 };
 
 export const callUnsplashApi = async location => {
   const unsplash_API_KEY =
-    "7a4e4d26cd4e7c49197d518c7b16d6965222651500b0cb612460eb516bc8b801";
+    "e17647ee71ab63ab4a25fc056672400b9c2e006b978baff9b318a7a96a41f699";
   let response = await fetch(
     "https://api.unsplash.com/search/photos/?client_id=" +
       unsplash_API_KEY +
       "&query=" +
-      "london"
+      location
   );
 
   let body = await response.json();

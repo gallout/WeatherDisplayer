@@ -7,12 +7,14 @@ const defaultForm = {
 const Form = props => {
   const [form, setForm] = useState(defaultForm);
 
-  const handleChange = event => {
-    const target = event.target;
+  const handleChange = e => {
+    e.preventDefault();
+    const target = e.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
     setForm({ ...form, [name]: value });
+    props.changeLocationAndImage(value);
   };
 
   const onSubmit = e => {
@@ -40,7 +42,6 @@ const Form = props => {
           onChange={handleChange}
         />
 
-        <button type="submit">Поиск</button>
         <button className="add-btn" type="submit">
           Добавить
         </button>
