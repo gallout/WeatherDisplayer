@@ -42,11 +42,11 @@ const AddNewCard = props => {
                       </span>
                     </div>
                     <h1>
-                      <p className="card-title">
+                      <p className="card-title" id="margin-center2">
                         <b>
-                          <span className="temperature-title">
+                          <div className="temperature-title">
                             {Math.round(item.temperature)}°C
-                          </span>
+                          </div>
                         </b>
                       </p>
                     </h1>

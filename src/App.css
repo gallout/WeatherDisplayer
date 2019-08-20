@@ -95,3 +95,12 @@ button:active {
   max-width: 2000px;
   margin: 0px auto;
 }
+
+#margin-center {
+  text-align: center !important;
+}
+
+#margin-center2 {
+  text-align: center !important;
+  padding-right: 30px;
+}
